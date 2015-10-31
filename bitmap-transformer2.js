@@ -44,7 +44,7 @@
 
     transforms.invertNonPal(data, firstbuf)
 
-    myEE.emit('toBuffer', data) // data should NOW be inverted
+    myEE.emit('toBuffer', data, firstbuf) // data should NOW be inverted
 
   });
 
@@ -58,27 +58,27 @@
 
     var newData = data.slice(0, 54).concat(paletteArray).concat(data.slice(metadata.pixelArrayOffset(firstbuf)))
 
- console.log("changed: ", paletteArray[0], paletteArray[1], paletteArray[2], paletteArray[3] )
+    console.log("changed: ", paletteArray[0], paletteArray[1], paletteArray[2], paletteArray[3] )
 
-    myEE.emit("toBuffer", newData)
+
+    myEE.emit("toBuffer", newData, firstbuf)
 
   });
 
 
   // Turn the transformed object back into a buffer.
-  myEE.on('toBuffer', function(data){  //this data is an array of the inverted data
-    var finalbuf = new Buffer(data.length);
-    for (var i = 0; i < finalbuf.length; i++){
-      finalbuf[i] = data[i]
+  myEE.on('toBuffer', function(data, firstbuf){  //this data is an array of the inverted data
+    for (var i = 0; i < firstbuf.length; i++){
+      firstbuf[i] = data[i]
     }
 
-    myEE.emit('write', finalbuf) //now data should be a buffer again
+    myEE.emit('write', firstbuf) //now data should be a buffer again
   })
 
   // Write that buffer to a new file.
   // file to write to is 2nd command line arg
-  myEE.on('write', function(data){
-    fs.writeFile(__dirname + '/img/' + process.argv[3], data, function(){
+  myEE.on('write', function(firstbuf){
+    fs.writeFile(__dirname + '/img/' + process.argv[3], firstbuf, function(){
       console.log("Transformed image has been saved")
     });
   });
