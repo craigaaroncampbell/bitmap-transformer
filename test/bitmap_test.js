@@ -84,7 +84,7 @@ describe('invertNonPal', function(){
   before(function(){
     firstbuf = new Buffer(100);
     for (var i = 0; i < 100; i++){
-      firstbuf[i] = 0x00;
+      firstbuf[i] = 0x  00;
       data[i] = 1;
     }
       firstbuf[10] = 0x37; // 0x39 = offset of 55  (so one only time through the loop!)
