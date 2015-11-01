@@ -5,9 +5,9 @@
 var fs = require('fs');
 var EE = require('events').EventEmitter;
 var myEE = new EE();
-var metadata = require('./lib/metadata.js')();
-var transforms = require('./lib/transforms.js')();
-var palette = require('./lib/palette.js')();
+var metadata = require('./lib/metadata.js');
+var transforms = require('./lib/transforms.js');
+var palette = require('./lib/palette.js');
 
 // Open file using fs and read it into a buffer
 //file to read is 1st command line arg

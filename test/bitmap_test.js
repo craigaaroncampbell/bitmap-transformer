@@ -1,7 +1,7 @@
 var expect = require('chai').expect;
-var transforms = require(__dirname + '/../lib/transforms.js')();
-var metadata = require(__dirname + '/../lib/metadata.js')();
-var palette = require(__dirname + '/../lib/palette.js')();
+var transforms = require(__dirname + '/../lib/transforms.js');
+var metadata = require(__dirname + '/../lib/metadata.js');
+var palette = require(__dirname + '/../lib/palette.js');
 
 describe('fileType', function(){
   before(function(){
