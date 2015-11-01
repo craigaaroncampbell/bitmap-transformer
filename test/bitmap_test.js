@@ -92,6 +92,6 @@ describe('invertNonPal', function(){
     transforms.invertNonPal(data, firstbuf);
   });
   it('should invert color data for non-palette images', function(){
-    expect(data[98]).to.eql(254);
+    expect(data[98]).to.eql(254); //data[98] used to be 1 before the inversion
   });
 });
