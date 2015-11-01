@@ -2,20 +2,21 @@
 
 var gulp = require('gulp');
 var jshint = require('gulp-jshint');
-
 var gulpMocha = require('gulp-mocha');
 
 gulp.task('jshint', function(){
-  return gulp.src(['gulpfile.js', 'index.js', 'test/*.js', 'lib/*.js'])
-  .pipe(jshint())
-  .pipe(jshint.reporter('default'));
+    gulp.src(['gulpfile.js', 'index.js', 'test/*.js', 'lib/*.js'])
+    .pipe(jshint())
+    .pipe(jshint.reporter('jshint-stylish'));
+    //.pipe(jshint.reporter('default'));
 });
 
-gulp.task('test', function(){
-  return gulp.src('test/**/*test.js')
-    .pipe(gulpMocha({reporter: 'nyan'}));
-    // .pipe(gulpMocha({reporter: 'mocha-lcov-reporter'}));
-    // .pipe(gulpMocha({reporter: 'mocha-notifier-reporter'}));
+gulp.task('test', ['jshint'], function(){
+  gulp.src('test/**/*test.js')
+  // .pipe(gulpMocha()) // this is the default mocha reporter
+  .pipe(gulpMocha({reporter: 'nyan'}));
+  // .pipe(gulpMocha({reporter: 'mocha-lcov-reporter'}));
+  // .pipe(gulpMocha({reporter: 'mocha-notifier-reporter'}));
 });
 
 
